@@ -22,10 +22,7 @@ io.on("connection", socket => {
     })
 });
 
-const _DATABASE = process.env.DB_URI;
-const _PORT = process.env.PORT;
-
-mongoose.connect(_DATABASE, 
+mongoose.connect(process.env.DB_URI, 
     {
         useNewUrlParser:true,
         useUnifiedTopology:true
@@ -48,6 +45,4 @@ app.use("/files", express.static(path.resolve(__dirname, '..', 'tmp')));
 app.use(require("./routes"));
 
 // Server de pé! O app.listen já ta vindo por parâmetro lá de cima na criação do server.
-server.listen(_PORT || 3333, () => {
-    console.log(`Server Running on PORT: ${_PORT}`);
-});
+server.listen(process.env.PORT || 3333);
